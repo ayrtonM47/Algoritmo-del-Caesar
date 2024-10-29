@@ -1,0 +1,109 @@
+package ar.edu.clase9;
+
+import java.util.Scanner;
+
+public class algoritmoCaesar {
+
+	public static void main(String[] args) {
+		boolean ejecucion;
+		ejecucion = true;
+		final String MSG_DESENCRIPTADO = "La cadena desencriptada es: ";
+		final String MSG_ENCRIPTADO = "La cadena encriptada es:  ";
+		Scanner teclado = new Scanner(System.in);
+		char opcion;
+		
+		String cadenaAencriptar;
+		String aDesencriptar;
+		int clave;
+
+
+
+		while (ejecucion) {
+			mostrarMenu();
+			opcion = teclado.next().charAt(0);
+			teclado.nextLine();
+			
+			switch (opcion) {
+			case '1':
+				System.out.println("Ingrese cadena a encriptar: ");
+				cadenaAencriptar = teclado.nextLine();
+				System.out.println("Ingrese clave de encripcion (de 3 a 100): ");
+				clave = teclado.nextInt();
+				teclado.nextLine();
+				//String cadenaEncriptada = encriptarCadena(cadenaAencriptar,clave);
+				
+				imprimirResultado(MSG_ENCRIPTADO, encriptarCadena(cadenaAencriptar,clave));
+				break;
+			case '2':
+				System.out.println("Ingrese cadena encriptada: ");
+				aDesencriptar = teclado.nextLine();
+				System.out.println("Ingrese clave de encripcion: ");
+				clave = teclado.nextInt();
+				teclado.nextLine();
+				imprimirResultado(MSG_DESENCRIPTADO, desencriptarCadena(aDesencriptar,clave));
+				break;
+			case '3':
+				System.out.println("fin");
+				ejecucion = false;
+				break;
+			default:
+				System.out.println("Opci n no v lida. Ingrese su opci n");
+				break;
+			}
+
+			
+		}
+		
+		
+		teclado.close();
+
+	}
+
+
+
+	private static void imprimirResultado(String mensaje, String cadena) {
+		System.out.println("*************************************");
+		System.out.println(mensaje+cadena);
+		System.out.println("*************************************");
+		
+	}
+
+
+
+	private static String desencriptarCadena(String aDesencriptar, int clave) {
+		String desencriptado;
+		String cadenaDesencriptada="";
+		for (int i = 0; i < aDesencriptar.length(); i++) {
+			desencriptado = Character.toString((char) ((int) (aDesencriptar.charAt(i) - clave)));
+			cadenaDesencriptada = cadenaDesencriptada + desencriptado;
+		}
+		return cadenaDesencriptada;
+	}
+
+
+
+	private static String encriptarCadena(String cadenaAencriptar, int clave) {
+		char encriptado;
+		String cadenaEncriptada="";
+		for (int i = 0; i < cadenaAencriptar.length(); i++) {
+			encriptado = (char) ((int) cadenaAencriptar.charAt(i) + clave);
+			cadenaEncriptada = cadenaEncriptada + encriptado;
+
+		}
+		return cadenaEncriptada;
+	}
+
+
+
+	private static void mostrarMenu() {
+		System.out.println("Bienvenidos al algortimo del Cesar  ");
+		System.out.println("1 - Encripcion");
+		System.out.println("2 - Desencripcion");
+		System.out.println("3 - Salir");
+		System.out.println("********************");
+		System.out.println("Ingrese su opcion : ");
+
+	}
+
+
+	}
